@@ -21,7 +21,7 @@ const loadUserLogins = async () => {
     .catch(() => []);
 
   return readFile(`./ulgs/${file}`, "utf-8").then((content) =>
-    content.slice(0, -1).split("\n").slice(0, 10)
+    content.slice(0, -1).split("\n").slice(0, 3)
   );
 };
 

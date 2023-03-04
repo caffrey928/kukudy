@@ -55,10 +55,10 @@ const getUserCountry = async (location = "local") => {
         writeData(countryPath, `${country}\t${IP}\n`);
       } catch (e) {
         console.log(e)
-        writeData(`./error/${location
+        await writeData(`./error/${location
           .replace(/[0-9]/g, "")
           .toUpperCase()}.txt`, `${location} ${getTS()}\n`)
-        return
+        throw new Error("Failed");
       }
     })
   );

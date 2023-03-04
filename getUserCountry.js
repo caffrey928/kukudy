@@ -31,30 +31,37 @@ const getUserCountry = async (location = "local") => {
     .toUpperCase()}/${location}.tsv`;
   await writeData(countryPath, `${getTS()}\n`);
 
-  await loadUserLogins().then((userLogins) =>
-    userLogins.forEach(async (userLogin, index) => {
-      await sleep(index * 40); // 25 Hz
+  try {
+    await loadUserLogins().then((userLogins) =>
+      userLogins.forEach(async (userLogin, index) => {
+        await sleep(index * 40); // 25 Hz
 
-      const res = await reqUserCountry(userLogin);
+        const res = await reqUserCountry(userLogin);
 
-      const country =
-        res.substring(0, 14) !== "Request failed"
-          ? res.substring(
+        const country =
+          res.substring(0, 14) !== "Request failed"
+            ? res.substring(
               res.search("USER-COUNTRY") + 14,
               res.search("MANIFEST-CLUSTER") - 2
             )
-          : "Country Request Failed";
-      const IP =
-        res.substring(0, 14) !== "Request failed"
-          ? res.substring(
+            : "Country Request Failed";
+        const IP =
+          res.substring(0, 14) !== "Request failed"
+            ? res.substring(
               res.search("USER-IP") + 9,
               res.search("SERVING-ID") - 2
             )
-          : "IP Request Failed";
+            : "IP Request Failed";
 
-      writeData(countryPath, `${country}\t${IP}\n`);
-    })
-  );
+        writeData(countryPath, `${country}\t${IP}\n`);
+      })
+    );
+  } catch (e) {
+    console.log(e)
+    writeData(`./error/${location
+      .replace(/[0-9]/g, "")
+      .toUpperCase()}.txt`, `${location} ${getTS()}\n`);
+  }
 };
 
 // node getUserCountry.js [LOCATION]

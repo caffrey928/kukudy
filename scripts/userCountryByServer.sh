@@ -45,4 +45,6 @@ do
     echo -e "Disconnecting from $CONFIG_ID ...\n"
     kill "$(cat ../nordvpn/pid.txt)"
     bash ../scripts/sleepUntilDisconnected.sh
+
+    sleep 25s
 done

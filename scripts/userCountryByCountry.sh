@@ -42,4 +42,6 @@ do
 
     kill "$(cat ../nordvpn/pid.txt)"
     bash ../scripts/sleepUntilDisconnected.sh
+
+    sleep 25s
 done

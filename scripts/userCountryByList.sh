@@ -18,6 +18,7 @@ cd "$(dirname "$0")/.." || exit 1
 TARGET_DIR=$1
 CHANNEL_COUNT=$2
 LIST=$3
+COUNTRY="${LIST}"
 
 mkdir -p "${TARGET_DIR}" || exit 1
 cd "${TARGET_DIR}" || exit 1
@@ -38,6 +39,7 @@ do
     node ../updateStreams.js "${CHANNEL_COUNT}"
     echo -e "Finish updateStreams.js"
     node ../getUserCountry.js "${line}"
+    python3 ../utils/compareServerList.py nordvpn ${COUNTRY:${#COUNTRY}-6:2}
     echo -e "Finish getUserCountry.js"
 
     echo -e "Disconnecting from $line ...\n"

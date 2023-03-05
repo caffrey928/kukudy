@@ -44,6 +44,8 @@ do
     echo -e "Disconnecting from $line ...\n"
     kill "$(cat ../nordvpn/pid.txt)"
     bash ../scripts/sleepUntilDisconnected.sh
+
+    sleep 25s
 done < "${LIST}"
 
 python3 ../utils/compareServerList.py nordvpn ${COUNTRY:${#COUNTRY}-6:2}

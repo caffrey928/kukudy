@@ -39,10 +39,11 @@ do
     node ../updateStreams.js "${CHANNEL_COUNT}"
     echo -e "Finish updateStreams.js"
     node ../getUserCountry.js "${line}"
-    python3 ../utils/compareServerList.py nordvpn ${COUNTRY:${#COUNTRY}-6:2}
     echo -e "Finish getUserCountry.js"
 
     echo -e "Disconnecting from $line ...\n"
     kill "$(cat ../nordvpn/pid.txt)"
     bash ../scripts/sleepUntilDisconnected.sh
 done < "${LIST}"
+
+python3 ../utils/compareServerList.py nordvpn ${COUNTRY:${#COUNTRY}-6:2}

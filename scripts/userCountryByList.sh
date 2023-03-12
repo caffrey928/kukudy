@@ -34,7 +34,7 @@ do
             --writepid       "../nordvpn/pid.txt"                 \
             --log-append     "../nordvpn/log.txt"                 \
             --daemon
-    bash ../scripts/sleepUntilConnected.sh || continue
+    bash ../scripts/sleepConnectedUserCountry.sh "${line}"|| continue
 
     node ../updateStreams.js "${CHANNEL_COUNT}"
     echo -e "Finish updateStreams.js"
@@ -47,5 +47,3 @@ do
 
     sleep 25s
 done < "${LIST}"
-
-python3 ../utils/compareServerList.py nordvpn ${COUNTRY:${#COUNTRY}-6:2}

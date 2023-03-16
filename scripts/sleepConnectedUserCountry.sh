@@ -3,7 +3,7 @@
 if ! [[ $# -eq 1 ]] ; then
     echo -e "
     Usage
-    sudo bash sleepConnectedUserCountry.sh CONFIG_ID ..."
+    sudo bash sleepConnectedUserCountry.sh CONFIG_ID"
 
     exit 1
 fi

@@ -42,7 +42,7 @@ do
     echo -e "Finish getUserCountry.js"
 
     echo -e "Disconnecting from $line ...\n"
-    kill "$(cat ../nordvpn/pid.txt)"
+    killall openvpn
     bash ../scripts/sleepUntilDisconnected.sh
 
     sleep 25s

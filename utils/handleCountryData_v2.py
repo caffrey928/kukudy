@@ -70,7 +70,7 @@ if len(sys.argv) == 2:
                     if value < temp_rounds:
                         for config_id in sorted(temp_array):
                             result.write("\t" + config_id + "\n")
-                        temp_rounds -= 1
+                        temp_rounds = value
                         result.write(str(temp_rounds) + " Rounds: \n")
                         temp_array = []
                     
@@ -79,9 +79,6 @@ if len(sys.argv) == 2:
 
                 for config_id in sorted(temp_array):
                     result.write("\t" + config_id + "\n")
-
-                for i in range(temp_rounds):
-                    result.write(str(temp_rounds - i - 1) + " Rounds: \n")
 
     else:
         print("Error: directory not exists")
